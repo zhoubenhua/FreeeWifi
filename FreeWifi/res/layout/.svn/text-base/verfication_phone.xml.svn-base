@@ -1,0 +1,65 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical"
+    android:background="@color/white" >
+	<include 
+	    android:id="@+id/hotspot_topbar" 
+	    android:layout_width="fill_parent" 
+	    android:layout_height="@dimen/dimen_45_dip" 
+	    layout="@layout/toolbar" 
+	     /> 
+    
+    <LinearLayout
+        android:layout_width="fill_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="@dimen/dimen_40_dip"
+        android:layout_marginLeft="@dimen/dimen_30_dip"
+        android:layout_marginRight="@dimen/dimen_30_dip"
+        android:orientation="vertical" >
+        <LinearLayout 
+            style="@style/fill_wrap"
+            android:orientation="vertical"
+            >
+            <EditText
+			    android:id="@+id/user_name_et"
+	            android:layout_width="fill_parent"
+	            android:layout_height="@dimen/dimen_45_dip"
+	            android:background="@null"
+	            android:gravity="center_vertical"
+	            android:hint="@string/input_phone"
+	            android:singleLine="true"
+	            android:inputType="phone"
+	            android:maxLength="11"
+	            android:textColor="@color/black"
+	            android:textSize="15sp" />
+            <ImageView 
+                android:background="@drawable/line"
+                android:layout_width="fill_parent"
+                android:layout_height="@dimen/dimen_1_dip"
+                />
+        </LinearLayout>
+	  	<LinearLayout 
+            style="@style/fill_wrap"
+            android:orientation="vertical"
+            >
+            <EditText
+			    android:id="@+id/user_password_et"
+	            android:layout_width="fill_parent"
+	            android:layout_height="@dimen/dimen_45_dip"
+	            android:background="@null"
+	            android:gravity="center_vertical"
+	            android:hint="@string/input_user_password"
+	            android:singleLine="true"
+	            android:inputType="textPassword"
+	            android:textColor="@color/black"
+	            android:textSize="15sp" />
+			 <ImageView 
+                android:background="@drawable/line"
+                android:layout_width="fill_parent"
+                android:layout_height="@dimen/dimen_1_dip"
+                />
+        </LinearLayout>
+	</LinearLayout>										
+</LinearLayout>

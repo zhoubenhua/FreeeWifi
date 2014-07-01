@@ -1,0 +1,22 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    style="@style/fill_fill"
+    android:orientation="vertical"
+    android:background="@color/white" >
+    <include 
+	    android:id="@+id/hotspot_topbar" 
+	    android:layout_width="fill_parent" 
+	    android:layout_height="@dimen/dimen_45_dip" 
+	    layout="@layout/toolbar" 
+	     /> 
+    <ListView 
+        style="@style/fill_wrap"
+      	android:cacheColorHint="@color/transparent"
+     	android:fadingEdge="none"
+     	android:dividerHeight="0.5dip"
+     	android:divider="@drawable/list_line"
+      	android:listSelector="@drawable/list_selector"
+      	android:scrollbars="none"
+        android:id="@+id/wifi_hotspot_lv"
+        />				
+</LinearLayout>

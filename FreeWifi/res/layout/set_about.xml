@@ -1,0 +1,205 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@color/background_color"
+    android:orientation="vertical" >
+
+    <include
+        android:id="@+id/hotspot_topbar"
+        android:layout_width="fill_parent"
+        android:layout_height="@dimen/dimen_45_dip"
+        layout="@layout/toolbar" />
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="@dimen/dimen_20_dip"
+        android:gravity="center"
+        android:orientation="vertical" >
+
+        <ImageView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="@dimen/dimen_15_dip"
+            android:src="@drawable/set_about_icon" />
+
+        <TextView
+            style="@style/wrap_wrap"
+            android:layout_margin="@dimen/dimen_8_dip"
+            android:text="@string/set_about_icon"
+            android:textColor="@color/movie_title_color"
+            android:textSize="20sp" />
+
+        <TextView
+            style="@style/wrap_wrap"
+            android:id="@+id/version_code_tv"
+            android:textColor="@color/movie_title_color"
+            android:textSize="12sp" />
+    </LinearLayout>
+
+    <LinearLayout
+        android:layout_width="fill_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="@dimen/dimen_15_dip"
+        android:orientation="vertical" >
+
+        <LinearLayout
+            android:layout_width="fill_parent"
+            android:layout_height="wrap_content"
+            android:orientation="vertical" >
+
+            <View
+                android:layout_width="fill_parent"
+                android:layout_height="0.5dip"
+                android:background="@drawable/list_line" />
+
+            <RelativeLayout
+                android:id="@+id/set_about_updata"
+                android:layout_width="fill_parent"
+                android:layout_height="@dimen/dimen_45_dip"
+                android:background="@color/white"
+                android:paddingLeft="@dimen/dimen_10_dip"
+                android:paddingRight="@dimen/dimen_10_dip" >
+
+                <TextView
+                    style="@style/wrap_wrap"
+                    android:layout_centerVertical="true"
+                    android:ellipsize="end"
+                    android:singleLine="true"
+                    android:text="@string/set_about_version_updata"
+                    android:textColor="@color/movie_title_color"
+                    android:textSize="15sp" />
+
+               
+  				<TextView
+  				    android:id="@+id/set_about_version"
+                    style="@style/wrap_wrap"
+                    android:layout_centerVertical="true"
+                    android:layout_toLeftOf="@+id/set_about_imageview"
+                    android:ellipsize="end"
+                    android:singleLine="true"
+                    android:layout_marginRight="@dimen/dimen_5_dip"
+                    android:textColor="@color/movie_title_color"
+                    android:textSize="12sp" />
+                <ImageView
+                    android:id="@+id/set_about_imageview"
+                    android:layout_width="@dimen/dimen_18_dip"
+                    android:layout_height="@dimen/dimen_18_dip"
+                    android:layout_alignParentRight="true"
+                    android:layout_centerVertical="true"
+                    android:src="@drawable/right_arrow" />
+            </RelativeLayout>
+
+            <View
+                android:layout_width="fill_parent"
+                android:layout_height="0.5dip"
+                android:background="@drawable/list_line" />
+        </LinearLayout>
+
+        <LinearLayout
+            android:layout_width="fill_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="@dimen/dimen_15_dip"
+            android:orientation="vertical" >
+
+            <View
+                android:layout_width="fill_parent"
+                android:layout_height="0.5dip"
+                android:background="@drawable/list_line" />
+
+            <RelativeLayout
+                android:id="@+id/set_about_sina"
+                android:layout_width="fill_parent"
+                android:layout_height="@dimen/dimen_45_dip"
+                android:background="@color/white"
+                android:paddingLeft="@dimen/dimen_10_dip"
+                android:paddingRight="@dimen/dimen_10_dip" >
+
+                <TextView
+                    style="@style/fill_wrap"
+                    android:layout_centerVertical="true"
+                    android:ellipsize="end"
+                    android:singleLine="true"
+                    android:text="@string/set_about_sina"
+                    android:textColor="@color/movie_title_color"
+                    android:textSize="15sp" />
+
+                <ImageView
+                    android:layout_width="@dimen/dimen_18_dip"
+                    android:layout_height="@dimen/dimen_18_dip"
+                    android:layout_alignParentRight="true"
+                    android:layout_centerVertical="true"
+                    android:src="@drawable/right_arrow" />
+            </RelativeLayout>
+
+            <View
+                android:layout_width="fill_parent"
+                android:layout_height="0.5dip"
+                android:layout_marginLeft="@dimen/dimen_10_dip"
+                android:layout_marginRight="@dimen/dimen_10_dip"
+                android:background="@drawable/list_line" />
+
+            <RelativeLayout
+                android:layout_width="fill_parent"
+                android:layout_height="@dimen/dimen_45_dip"
+                android:background="@color/white"
+                android:paddingLeft="@dimen/dimen_10_dip"
+                android:paddingRight="@dimen/dimen_10_dip" >
+
+                <TextView
+                    style="@style/fill_wrap"
+                    android:layout_centerVertical="true"
+                    android:ellipsize="end"
+                    android:singleLine="true"
+                    android:text="@string/set_about_net"
+                    android:textColor="@color/movie_title_color"
+                    android:textSize="15sp" />
+
+                <ImageView
+                    android:layout_width="@dimen/dimen_18_dip"
+                    android:layout_height="@dimen/dimen_18_dip"
+                    android:layout_alignParentRight="true"
+                    android:layout_centerVertical="true"
+                    android:src="@drawable/right_arrow" />
+            </RelativeLayout>
+
+            <View
+                android:layout_width="fill_parent"
+                android:layout_height="0.5dip"
+                android:layout_marginLeft="@dimen/dimen_10_dip"
+                android:layout_marginRight="@dimen/dimen_10_dip"
+                android:background="@drawable/list_line" />
+
+            <RelativeLayout
+                android:layout_width="fill_parent"
+                android:layout_height="@dimen/dimen_45_dip"
+                android:background="@color/white"
+                android:paddingLeft="@dimen/dimen_10_dip"
+                android:paddingRight="@dimen/dimen_10_dip" >
+
+                <TextView
+                    style="@style/fill_wrap"
+                    android:layout_centerVertical="true"
+                    android:ellipsize="end"
+                    android:singleLine="true"
+                    android:text="@string/set_about_phone"
+                    android:textColor="@color/movie_title_color"
+                    android:textSize="15sp" />
+
+                <ImageView
+                    android:layout_width="@dimen/dimen_18_dip"
+                    android:layout_height="@dimen/dimen_18_dip"
+                    android:layout_alignParentRight="true"
+                    android:layout_centerVertical="true"
+                    android:src="@drawable/right_arrow" />
+            </RelativeLayout>
+
+            <View
+                android:layout_width="fill_parent"
+                android:layout_height="0.5dip"
+                android:background="@drawable/list_line" />
+        </LinearLayout>
+    </LinearLayout>
+
+</LinearLayout>

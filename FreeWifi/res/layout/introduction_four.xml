@@ -1,0 +1,23 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout 
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="fill_parent" 
+    android:layout_height="fill_parent" 
+    android:background="#333333" 
+    android:orientation="vertical"
+     >
+    <ImageView 
+        style="@style/wrap_wrap"
+        android:id="@+id/top_iv"
+        android:layout_weight="1"
+        android:src="@drawable/introduction_four"
+        />
+    <Button 
+        android:layout_width="@dimen/dimen_260_dip"
+        android:background="@drawable/start_bt"
+        android:layout_marginBottom="@dimen/dimen_30_dip"
+        android:layout_height="@dimen/dimen_45_dip"
+        android:layout_gravity="center_horizontal|bottom"
+        android:id="@+id/start_bt"
+        />
+</LinearLayout>

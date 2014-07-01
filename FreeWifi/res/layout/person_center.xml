@@ -1,0 +1,76 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical"
+    android:background="#f5f5f5" >
+	<include 
+	    android:id="@+id/hotspot_topbar" 
+	    android:layout_width="fill_parent" 
+	    android:layout_height="@dimen/dimen_45_dip" 
+	    layout="@layout/toolbar" 
+	     /> 
+    
+    <RelativeLayout
+        android:layout_width="fill_parent"
+        android:layout_height="fill_parent"
+        android:orientation="vertical" >
+        <RelativeLayout 
+            android:layout_width="fill_parent"
+        	android:layout_height="@dimen/dimen_104_dip"
+        	android:background="@drawable/person_center_bg"
+            >
+            <RelativeLayout
+                style="@style/fill_wrap"
+                android:layout_centerVertical="true"
+                >
+                <com.zhephone.hotspot.app.widget.DownloadImageView 
+				    android:id="@+id/user_head_iv" 
+				    style="@style/wrap_wrap"
+				    android:layout_marginLeft="@dimen/dimen_20_dip"
+				    android:layout_alignParentLeft="true" 		
+				    android:src="@drawable/user_head"
+				    /> 
+				<LinearLayout
+	                style="@style/wrap_wrap"
+	                android:layout_toRightOf="@+id/user_head_iv"
+	                android:layout_centerVertical="true"
+	                android:layout_marginLeft="@dimen/dimen_5_dip"
+	                android:orientation="vertical"
+	                >
+	                <TextView 
+	                    style="@style/fill_wrap"
+	                    android:id="@+id/user_name_tv"
+	                    android:singleLine="true"
+	                    android:ellipsize="end"
+	                    android:textSize="16sp"
+	                    android:textColor="@color/white"
+	                    />
+	                 <TextView 
+	                    style="@style/fill_wrap"
+	                    android:id="@+id/user_id_tv"
+	                    android:textSize="13sp"
+	                    android:visibility="gone"
+	                    android:textColor="@color/white"
+	                    />
+            	</LinearLayout>
+            </RelativeLayout>
+           
+        </RelativeLayout>
+        <LinearLayout
+	        android:layout_width="fill_parent"
+	        android:layout_height="wrap_content"
+	        android:layout_marginBottom="@dimen/dimen_15_dip"
+	        android:layout_alignParentBottom="true"
+	        android:orientation="vertical" >
+			<ImageView
+			    android:id="@+id/exit_login_iv"
+			    android:layout_width="@dimen/dimen_302_dip"
+				android:layout_height="@dimen/dimen_50_dip"
+				android:src="@drawable/exit_login_selector"
+				android:layout_gravity="center_horizontal"
+				/>
+		</LinearLayout>
+	</RelativeLayout>					
+						
+</LinearLayout>

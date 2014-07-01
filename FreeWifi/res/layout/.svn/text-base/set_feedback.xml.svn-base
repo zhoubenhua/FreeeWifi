@@ -1,0 +1,138 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    style="@style/fill_fill"
+    android:background="@color/background_color"
+    android:orientation="vertical" >
+
+    <include
+        android:id="@+id/hotspot_topbar"
+        android:layout_width="fill_parent"
+        android:layout_height="@dimen/dimen_45_dip"
+        layout="@layout/toolbar" />
+
+    <LinearLayout
+		style="@style/wrap_wrap"
+        android:background="@color/white"
+        android:layout_marginTop="@dimen/dimen_15_dip"
+        android:orientation="vertical" >
+
+        <View
+            android:layout_width="fill_parent"
+            android:layout_height="0.5dip"
+            android:background="@drawable/list_line" />
+        <EditText
+            android:id="@+id/set_feedback_content"
+            android:layout_width="fill_parent"
+            android:layout_marginTop="@dimen/dimen_5_dip"
+            android:layout_height="@dimen/dimen_140_dip"
+            android:background="@null"
+            android:gravity="left"
+            android:hint="@string/set_feedback_tip"
+            android:inputType="textMultiLine"
+            android:paddingLeft="@dimen/dimen_10_dip"
+            android:paddingRight="@dimen/dimen_10_dip"
+            android:textSize="15sp" >
+        </EditText>
+        <TextView
+            android:id="@+id/set_feedback_tip"
+            android:layout_width="fill_parent"
+            android:layout_height="wrap_content"
+            android:visibility="gone"
+            android:layout_margin="@dimen/dimen_10_dip"
+            android:gravity="right"
+            android:text="@string/set_feedback_number_tip"
+            android:textSize="12sp" />
+
+        <FrameLayout
+            android:layout_width="match_parent"
+            android:visibility="gone"
+            android:layout_height="@dimen/dimen_200_dip"
+            android:padding="@dimen/dimen_5_dip" >
+
+            <TextView
+               android:id="@+id/set_feedback_tip"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_gravity="bottom|right"
+                android:textSize="12sp"
+                android:layout_margin="3dip"
+                android:text="@string/set_feedback_number_tip" />
+
+            <ScrollView
+                android:id="@+id/scrollView1"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent" >
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:orientation="vertical" >
+
+                    <EditText
+                        android:id="@+id/set_feedback_content"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:background="@null"
+                        android:ems="10"
+                        android:hint="@string/set_feedback_tip"
+                        android:inputType="textMultiLine"
+                        android:maxLength="200"
+                        android:padding="@dimen/dimen_3_dip"
+                        android:textSize="15sp" >
+                    </EditText>
+                </LinearLayout>
+            </ScrollView>
+        </FrameLayout>
+
+        <View
+            android:layout_width="fill_parent"
+            android:layout_height="0.5dip"
+            android:background="@drawable/list_line" />
+    </LinearLayout>
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="@dimen/dimen_15_dip"
+        android:orientation="vertical" >
+
+        <View
+            android:layout_width="fill_parent"
+            android:layout_height="0.5dip"
+            android:background="@drawable/list_line" />
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:gravity="center_vertical"
+             android:background="@color/white"
+            android:orientation="horizontal" >
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_margin="@dimen/dimen_12_dip"
+                android:text="@string/set_feedback_phone"
+                android:textColor="@color/movie_title_color"
+                android:textSize="12sp" />
+
+            <EditText
+                android:id="@+id/set_feedback_phone"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:hint="@string/set_feedback_phone_tip"
+                android:background="@null"
+                android:textSize="15sp"
+                android:maxLength="11"
+                android:inputType="phone"
+                android:text="" >
+            </EditText>
+        </LinearLayout>
+
+        <View
+            android:layout_width="fill_parent"
+            android:layout_height="0.5dip"
+            android:background="@drawable/list_line" />
+    </LinearLayout>
+
+</LinearLayout>

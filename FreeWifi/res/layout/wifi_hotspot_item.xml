@@ -1,0 +1,29 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="fill_parent"
+    android:layout_height="@dimen/dimen_45_dip"
+    android:orientation="vertical" >
+    <LinearLayout 
+        style="@style/wrap_wrap"
+        android:paddingLeft="@dimen/dimen_10_dip"
+        android:paddingRight="@dimen/dimen_10_dip"
+        android:paddingTop="@dimen/dimen_5_dip"
+        android:paddingBottom="@dimen/dimen_5_dip"
+        android:layout_centerVertical="true"
+        android:orientation="vertical"
+        >
+       <TextView
+            style="@style/fill_wrap"
+	        android:id="@+id/wifi_ssid_name_tv"
+	        android:textSize="15sp"
+	        android:textColor="@color/black"
+	        />
+       <TextView 
+	        style="@style/fill_wrap"
+	        android:id="@+id/wifi_hotspot_connect_statu_tv"
+	        android:textSize="15sp"
+	        android:textColor="@color/black"
+	        />
+    </LinearLayout>
+
+</RelativeLayout>

@@ -1,0 +1,313 @@
+package com.zhephone.hotspot.app.ui;
+import java.util.ArrayList;
+import java.util.List;
+import org.apache.commons.lang.StringUtils;
+import android.content.Context;
+import android.content.Intent;
+import android.graphics.drawable.Drawable;
+import android.os.Bundle;
+import android.view.View;
+import android.view.View.OnClickListener;
+import android.widget.Button;
+import android.widget.Toast;
+import com.alibaba.fastjson.JSON;
+import com.baidu.location.BDLocation;
+import com.baidu.location.BDLocationListener;
+import com.baidu.location.LocationClient;
+import com.baidu.location.LocationClientOption;
+import com.baidu.mapapi.BMapManager;
+import com.baidu.mapapi.map.ItemizedOverlay;
+import com.baidu.mapapi.map.LocationData;
+import com.baidu.mapapi.map.MapController;
+import com.baidu.mapapi.map.MapView;
+import com.baidu.mapapi.map.MyLocationOverlay;
+import com.baidu.mapapi.map.MyLocationOverlay.LocationMode;
+import com.baidu.mapapi.map.OverlayItem;
+import com.baidu.platform.comapi.basestruct.GeoPoint;
+import com.zhephone.hotspot.R;
+import com.zhephone.hotspot.app.AppConfig;
+import com.zhephone.hotspot.app.AppContext;
+import com.zhephone.hotspot.app.BaseActivity;
+import com.zhephone.hotspot.app.api.APIAsyncTask;
+import com.zhephone.hotspot.app.api.CallbackListener;
+import com.zhephone.hotspot.app.api.Protocol;
+import com.zhephone.hotspot.app.common.CommonUtil;
+import com.zhephone.hotspot.app.common.Constant;
+import com.zhephone.hotspot.app.http.RequestParams;
+import com.zhephone.hotspot.app.ui.chat.MultiplayerChatActivity;
+import com.zhephone.hotspot.app.ui.chat.SingleChatActivity;
+import com.zhephone.hotspot.app.ui.user.LoginActivity;
+import com.zhephone.hotspoti.app.bean.Hot;
+import com.zhephone.hotspoti.app.bean.HotList;
+
+
+public class NearHotActivity extends BaseActivity {
+
+	MapView mMapView = null; // 地图View
+	LocationClient mLocClient = null;
+	LocationData locData = null;
+	MyLocationOverlay myLocationOverlay = null;
+	private MapController mMapController = null;
+
+	boolean isRequest = false;// 是否手动触发请求定位
+	boolean isFirstLoc = true;// 是否首次定位
+
+	Button requestLocButton = null; 
+	private MyOverLay mOverlay = null;
+	private ArrayList<OverlayItem>  mItems = null; 
+	private List<Hot> hots;
+	private Context context;
+	
+	@Override
+	protected void initViews() {
+		mMapView = (MapView) findViewById(R.id.bmapsView);
+		requestLocButton = (Button) findViewById(R.id.button1);
+		
+		requestLocButton.setTag(1);
+		mMapController = mMapView.getController();
+		mMapView.setBuiltInZoomControls(true); 
+		mMapController.setZoom(15);
+	}
+	
+	@Override
+	protected void onCreate(Bundle savedInstanceState) {
+		// TODO Auto-generated method stub
+		super.onCreate(savedInstanceState);
+		this.setContentView(R.layout.near_hot);
+		this.setUpViews();
+	}
+
+	
+	private OnClickListener btnClickListener = new OnClickListener() {
+		public void onClick(View v) {
+			switch (Integer.parseInt(v.getTag().toString())) {
+			case 1:
+				// 手动定位请求
+				requestLocClick();
+				break;
+			}
+		}			
+	};
+	
+	private void loadNearHotSucess(String data) {
+		try {
+			HotList hotList = JSON.parseObject(data, HotList.class);
+			if(hotList.getDevices() != null && hotList.getDevices().size()>0) {
+				hots = hotList.getDevices();
+				/**
+				 * 创建自定义overlay
+				*/
+				 mOverlay = new MyOverLay(getResources().getDrawable(R.drawable.icon_marka),mMapView);	
+				 /**
+				  * 准备overlay 数据
+				  */
+				 GeoPoint gp;
+				 OverlayItem item;
+				 for(Hot hot:hots) {
+					 if(StringUtils.isNotEmpty(hot.getLatitude()) && StringUtils.isNotEmpty(hot.getLongitude())) {
+						 gp = new GeoPoint((int)((Double.valueOf(hot.getLatitude()))*1e6),
+								 (int)((Double.valueOf(hot.getLongitude()))*1e6));
+						 item = new OverlayItem(gp,"覆盖物","");
+						 /**
+						  * 设置overlay图标，如不设置，则使用创建ItemizedOverlay时的默认图标.
+						  */
+						 item.setMarker(getResources().getDrawable(R.drawable.icon_geo));
+						 mOverlay.addItem(item);
+					 }
+				 }
+				 /**
+				  * 保存所有item，以便overlay在reset后重新添加
+				  */
+				 mItems = new ArrayList<OverlayItem>();
+				 mItems.addAll(mOverlay.getAllItem());
+				 /**
+				  * 将overlay 添加至MapView中
+				  */
+				 mMapView.getOverlays().add(mOverlay);
+				 /**
+				  * 刷新地图
+				  */
+				// 修改定位数据后刷新图层生效
+				mMapView.refresh();
+			}
+		} catch (Exception e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		} 
+		dissmissProgressDialog();
+	}
+	
+	private void loadNearHotFailed(String error) {
+		dissmissProgressDialog();
+		CommonUtil.sendToast(getApplicationContext(), error);
+	}
+	
+	private void loadNearHot() {
+		if (CommonUtil.checkNetwork(getApplicationContext())) {
+			showProgressDialog(null, getResources().getString(R.string.loading));
+			RequestParams paramMap = new RequestParams();
+			final APIAsyncTask api = new APIAsyncTask();			
+			api.get(Protocol.NEAR_HOT,paramMap, new CallbackListener() {
+				public void onSuccess(String data) {
+					if (data != null) {
+						loadNearHotSucess(data);
+					}
+				}
+
+				public void onError(String error) {
+					loadNearHotFailed(error);
+				}
+			});
+			api.execute();
+		}
+	}
+
+	private void initMapData() {
+		 //定位初始化
+        mLocClient = new LocationClient( this );
+        locData = new LocationData();
+        mLocClient.registerLocationListener(new MyLocationListenner());
+        LocationClientOption option = new LocationClientOption();
+        option.setOpenGps(true);//打开gps
+        option.setCoorType("bd09ll");     //设置坐标类型
+        option.setScanSpan(1000);
+        mLocClient.setLocOption(option);
+        mLocClient.start();
+       
+        //定位图层初始化
+		myLocationOverlay = new MyLocationOverlay(mMapView);
+		
+		//设置定位数据
+	    myLocationOverlay.setData(locData);
+	    //添加定位图层
+		mMapView.getOverlays().add(myLocationOverlay);
+		myLocationOverlay.enableCompass();
+		//修改定位数据后刷新图层生效
+		mMapView.refresh();
+	}
+	
+	@Override
+	protected void initData() {
+		context = this.getApplicationContext();
+		AppContext appContext = AppContext.getInstance();
+		if (appContext.mBMapManager == null) {
+			appContext.mBMapManager = new BMapManager(getApplicationContext());
+	        /**
+	        * 如果BMapManager没有初始化则初始化BMapManager
+	         */
+			appContext.mBMapManager.init(new AppContext.MyGeneralListener());
+	    }
+		initMapData();
+		loadNearHot();
+	}
+
+	@Override
+	protected void addListener() {
+		requestLocButton.setOnClickListener(btnClickListener);
+	}
+
+	/**
+	 * 手动触发一次定位请求
+	 */
+	public void requestLocClick() {
+		isRequest = true;
+		mLocClient.requestLocation();
+		Toast.makeText(NearHotActivity.this, getResources().getString(R.string.locationing), Toast.LENGTH_SHORT).show();
+	}
+
+	@Override
+	protected void onPause() {
+		mMapView.onPause();
+		super.onPause();
+	}
+
+	@Override
+	protected void onResume() {
+		mMapView.onResume();
+		super.onResume();
+	}
+
+	@Override
+	protected void onDestroy() {
+		// 退出时销毁定位
+		if (mLocClient != null)
+			mLocClient.stop();
+		mMapView.destroy();
+		super.onDestroy();
+	}
+
+	/**
+	 * 定位SDK监听函数
+	 */
+	public class MyLocationListenner implements BDLocationListener {
+
+		public void onReceiveLocation(BDLocation location) {
+			if (location == null)
+				return; 
+			locData.latitude = location.getLatitude();
+			locData.longitude = location.getLongitude();
+			// 如果不显示定位精度圈，将accuracy赋值为0即可
+			locData.accuracy = location.getRadius();
+			locData.direction = location.getDerect();
+			// 更新定位数据
+			myLocationOverlay.setData(locData);
+			// 是手动触发请求或首次定位时，移动到定位点
+			if (isRequest || isFirstLoc) {
+
+				// 更新图层数据执行刷新后生效  
+				mMapView.refresh(); 
+				mMapController.animateTo(new GeoPoint(
+						(int) (locData.latitude * 1e6),
+						(int) (locData.longitude * 1e6)));
+				isRequest = false;   
+				myLocationOverlay.setLocationMode(LocationMode.FOLLOWING);
+			}
+			// 首次定位完成
+			isFirstLoc = false;
+		}
+
+		public void onReceivePoi(BDLocation poiLocation) {
+			if (poiLocation == null) {
+				return;
+			}
+		}
+	}
+	
+	/**
+	 * @author JL
+	 * 
+	 * 要处理overlay点击事件时需要继承ItemizedOverlay 不处理点击事件时可直接生成ItemizedOverlay.
+	 */
+	private class MyOverLay extends ItemizedOverlay<OverlayItem> {
+	    // 处理tap点击的句柄
+	    public MyOverLay(Drawable mark, MapView mapView) {
+	        super(mark, mapView);
+	        // TODO Auto-generated constructor stub
+	    }
+
+	    // 在此处理item点击事件，并且一定会触发MapView的点击事件
+	    //arg0表示多个item中的序号
+	    @Override
+	    protected boolean onTap(int index) {
+	    	Hot hot = hots.get(index);
+	    	Intent intent;
+	    	if(AppConfig.getInstance().isLogin()) {
+	    		intent = new Intent(context,MultiplayerChatActivity.class);
+	    		intent.putExtra(Constant.ChatIntentDef.GROUP_CHAT_ID, hot.getDeviceToken());
+	    	} else {
+	    		intent = new Intent(context,LoginActivity.class);
+	    	}
+	    	startActivity(intent);						
+	        return true;
+	    }
+
+	    // 在此处理MapView的点击事件，不一定会触发item点击事件
+	    @Override
+	    public boolean onTap(GeoPoint pt, MapView mapView) {
+	        // TODO Auto-generated method stub
+	        super.onTap(pt, mapView);
+	        return false;
+	    }
+
+	}
+}

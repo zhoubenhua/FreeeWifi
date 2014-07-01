@@ -1,0 +1,19 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="fill_parent"
+    android:layout_height="fill_parent"
+    android:background="#FFFFFF"
+    android:orientation="vertical" >
+	<android.support.v4.view.ViewPager 
+	    android:id="@+id/introduction_vp" 
+	    android:layout_width="fill_parent" 
+	    android:layout_height="wrap_content" />
+	 <com.zhephone.hotspot.app.widget.IconPageIndicator
+            android:id="@+id/circle_indicator"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"			
+            android:layout_alignParentBottom="true"
+            android:layout_marginBottom="@dimen/dimen_95_dip"
+            android:layout_centerHorizontal="true"
+            />
+</RelativeLayout>

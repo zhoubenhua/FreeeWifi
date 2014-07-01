@@ -1,0 +1,42 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="fill_parent"
+    android:orientation="vertical"
+    android:background="@color/white" >
+	<SurfaceView 
+	    android:id="@+id/surface" 
+	    android:layout_weight="1"
+	    android:layout_width="wrap_content" 
+	    android:layout_height="wrap_content" 
+	    android:layout_gravity="center"> 
+	</SurfaceView>		
+	<SeekBar
+	    android:id="@+id/progress_bar" 
+	    android:layout_height="wrap_content"
+	    android:layout_width="fill_parent"
+	    style="?android:attr/progressBarStyleHorizontal"
+	    />	
+  	<LinearLayout 
+  	    android:orientation="horizontal"  
+        android:layout_gravity="center_horizontal" 
+        android:layout_marginTop="4dip"  
+		android:layout_height="wrap_content" 
+		android:layout_width="wrap_content">  
+        <Button 
+            android:layout_width="wrap_content"  
+            android:layout_height="wrap_content" 
+            android:id="@+id/play_bt"  
+             android:text="播放" />  
+        <Button 
+            android:layout_height="wrap_content" 
+            android:id="@+id/pause_bt"  
+			android:text="暂停" 
+			android:layout_width="wrap_content" />
+    </LinearLayout>  
+    <View
+        android:layout_width="fill_parent"
+        android:layout_height="10dip" 
+        android:layout_marginTop="4dip" 
+        />
+</LinearLayout>

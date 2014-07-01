@@ -1,0 +1,87 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical"
+    android:background="@color/white" >
+	<include 
+	    android:id="@+id/hotspot_topbar" 
+	    android:layout_width="fill_parent" 
+	    android:layout_height="@dimen/dimen_45_dip" 
+	    layout="@layout/toolbar" 
+	     /> 
+    
+    <LinearLayout
+        android:layout_width="fill_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="@dimen/dimen_40_dip"
+        android:layout_marginLeft="@dimen/dimen_30_dip"
+        android:layout_marginRight="@dimen/dimen_30_dip"
+        android:orientation="vertical" >
+        <LinearLayout 
+            style="@style/fill_wrap"
+            android:id="@+id/login_ll"
+            android:orientation="vertical"
+            >
+            <EditText
+			    android:id="@+id/user_name_et"
+	            android:layout_width="fill_parent"
+	            android:layout_height="@dimen/dimen_45_dip"
+	            android:background="@null"
+	            android:gravity="center_vertical"
+	            android:hint="@string/input_phone"
+	            android:singleLine="true"
+	            android:inputType="phone"
+	            android:maxLength="11"
+	            android:textColor="@color/black"
+	            android:textSize="15sp" />
+            <ImageView 
+                android:background="@drawable/line"
+                android:layout_width="fill_parent"
+                android:layout_height="@dimen/dimen_1_dip"
+                />
+        </LinearLayout>
+	  	<LinearLayout 
+            style="@style/fill_wrap"
+            android:id="@+id/register_ll"
+            android:orientation="vertical"
+            >
+            <EditText
+			    android:id="@+id/user_password_et"
+	            android:layout_width="fill_parent"
+	            android:layout_height="@dimen/dimen_45_dip"
+	            android:background="@null"
+	            android:gravity="center_vertical"
+	            android:hint="@string/input_user_password"
+	            android:inputType="textPassword"
+	            android:singleLine="true"
+	            android:textColor="@color/black"
+	            android:textSize="15sp" />
+			<ImageView 
+                android:background="@drawable/line"
+                android:layout_width="fill_parent"
+                android:layout_height="@dimen/dimen_1_dip"
+                />
+        </LinearLayout>
+
+	</LinearLayout>					
+	<LinearLayout
+	    style="@style/wrap_wrap"
+	    android:layout_marginTop="@dimen/dimen_35_dip"
+	    android:layout_gravity="center_horizontal"
+	    >
+	  	<TextView 
+	  	    style="@style/wrap_wrap"
+	  	    android:textColor="#060606"
+	  	    android:text="没有账号?点击这里"
+	  	    android:textSize="13sp"
+	  	    />
+	  	<TextView 
+	  	    android:id="@+id/register_tv"
+	  	    style="@style/wrap_wrap"
+	  	    android:textColor="#51c77d"
+	  	    android:text="快速注册"
+	  	    android:textSize="13sp"
+	  	    />
+	</LinearLayout>							
+</LinearLayout>

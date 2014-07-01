@@ -1,0 +1,320 @@
+<manifest xmlns:android="http://schemas.android.com/apk/res/android"
+    package="com.zhephone.hotspot"
+    android:versionCode="1"
+    android:versionName="1.0.1" >
+
+    <uses-sdk
+        android:minSdkVersion="7"
+        android:targetSdkVersion="10" />
+
+    <permission
+        android:name="com.zhephone.hotspot.permission.JPUSH_MESSAGE"
+        android:protectionLevel="signature" />
+    <!-- 获取任务,用来判断当前应用是否在前台还是在后台 -->			
+	<uses-permission android:name="android.permission.GET_TASKS" /> 
+    <!-- Required  一些系统要求的权限，如访问网络等 -->			
+    <uses-permission android:name="com.zhephone.hotspot.permission.JPUSH_MESSAGE" />
+    <uses-permission android:name="android.permission.RECEIVE_USER_PRESENT" />
+    <uses-permission android:name="android.permission.WAKE_LOCK" />
+    <uses-permission android:name="android.permission.VIBRATE" />
+    <uses-permission android:name="android.permission.MOUNT_UNMOUNT_FILESYSTEMS" />
+    <uses-permission android:name="android.permission.SYSTEM_ALERT_WINDOW" />
+
+    <!-- location permission -->
+    <permission android:name="android.permission.BAIDU_LOCATION_SERVICE" />
+
+    <uses-permission android:name="android.permission.ACCESS_MOCK_LOCATION" />
+    <uses-permission android:name="android.permission.ACCESS_COARSE_LOCATION" />
+
+    <!-- wifi permission -->
+    <uses-permission android:name="android.permission.ACCESS_WIFI_STATE" />
+    <uses-permission android:name="android.permission.CHANGE_WIFI_STATE" />
+
+    <uses-feature android:name="android.hardware.wifi" />
+
+    <!-- sdcard permission -->
+    <uses-permission android:name="android.permission.WRITE_EXTERNAL_STORAGE" />
+    <uses-permission android:name="android.permission.READ_EXTERNAL_STORAGE" />
+    <!-- network permission -->
+    <uses-permission android:name="android.permission.INTERNET" />
+    <uses-permission android:name="android.permission.ACCESS_NETWORK_STATE" />
+    <uses-permission android:name="android.permission.CHANGE_NETWORK_STATE" />
+    <!-- phone permission -->
+    <uses-permission android:name="android.permission.READ_PHONE_STATE" />
+    <!-- seting permission -->
+    <uses-permission android:name="android.permission.WRITE_SETTINGS" />
+    <!-- 振动权限 -->
+    <uses-permission android:name="android.permission.VIBRATE"></uses-permission>
+
+    
+
+    <supports-screens
+        android:anyDensity="true"
+        android:largeScreens="true"
+        android:normalScreens="true"
+        android:resizeable="true"
+        android:smallScreens="true" />
+
+    <application
+        android:allowBackup="true"
+        android:name=".app.AppContext"
+        android:icon="@drawable/app_icon"
+        android:label="@string/app_name" >
+        <activity
+            android:name=".app.ui.WelcomeActivity"
+            android:label="@string/title_activity_main"
+            android:screenOrientation="portrait"
+            android:theme="@style/AppStartTheme" >
+            <intent-filter>
+                <action android:name="android.intent.action.MAIN" />
+
+                <category android:name="android.intent.category.LAUNCHER" />
+            </intent-filter>
+        </activity>
+        <activity
+            android:name=".app.ui.VideoActivity"
+            android:label="@string/title_activity_main"
+            android:screenOrientation="portrait"
+            android:theme="@style/AppStartTheme" />
+        <activity
+            android:name=".app.ui.MainActivity"
+            android:label="@string/title_activity_main"
+            android:screenOrientation="portrait"
+            android:theme="@style/AppStartTheme" >
+        </activity>
+        <activity
+            android:name=".app.ui.IntroductionActivity"
+            android:label="@string/title_activity_main"
+            android:screenOrientation="portrait"
+            android:theme="@style/AppStartTheme" >
+        </activity>
+        <activity
+            android:name=".app.ui.SettingActivity"
+            android:label="@string/title_activity_main"
+            android:screenOrientation="portrait"
+            android:theme="@style/AppStartTheme" >
+        </activity>
+        <!-- 注册setting ui -->
+
+        <activity
+            android:name="com.zhephone.hotspot.app.ui.setting.SetAboutActivity"
+            android:screenOrientation="portrait"
+            android:theme="@style/AppStartTheme" >
+        </activity>
+        <activity
+            android:name="com.zhephone.hotspot.app.ui.setting.SetFeedbackActivity"
+            android:screenOrientation="portrait"
+             android:configChanges="orientation|keyboard|keyboardHidden"
+            android:windowSoftInputMode="adjustResize|stateHidden"
+            android:theme="@style/AppStartTheme" >
+        </activity>
+        <activity
+            android:name="com.zhephone.hotspot.app.ui.setting.SetVersionInfoActivity"
+            android:screenOrientation="portrait"
+            android:theme="@style/AppStartTheme" >
+        </activity>
+
+        <!-- 注册wifi ui -->
+        <activity
+            android:name=".app.ui.wifi.WifiListActivity"
+            android:label="@string/title_activity_main"
+            android:screenOrientation="portrait"
+            android:theme="@style/AppStartTheme" >
+        </activity>
+        <activity
+            android:name=".app.ui.wifi.WifiInputPasswordActivity"
+            android:label="@string/title_activity_main"
+            android:screenOrientation="portrait"
+            android:theme="@style/AppStartTheme" >
+        </activity>
+        <activity
+            android:name=".app.ui.chat.NearGroupActivity"
+            android:label="@string/title_activity_main"
+            android:screenOrientation="portrait"
+            android:theme="@style/AppStartTheme" >
+        </activity>
+        <!-- 注册 视频ui -->
+        <activity
+            android:name="io.vov.vitamio.activity.InitActivity"
+            android:configChanges="orientation|keyboardHidden|navigation"
+            android:launchMode="singleTop"
+            android:theme="@android:style/Theme.NoTitleBar"
+            android:windowSoftInputMode="stateAlwaysHidden" />
+        <activity
+            android:name=".app.ui.video.PlayActivity"
+             android:theme="@style/AppStartTheme"
+            android:configChanges="orientation|keyboard|keyboardHidden|navigation" />
+        <activity
+            android:name=".app.ui.video.VideoCategoryListActivity"
+            android:screenOrientation="portrait"
+            android:theme="@style/AppStartTheme"
+            />
+
+        <!-- 注册app ui -->
+        <activity
+            android:name=".app.ui.appstore.AppListActivity"
+            android:configChanges="orientation|keyboard|keyboardHidden|navigation"
+            android:screenOrientation="portrait"
+            android:theme="@style/AppStartTheme" />
+        <!-- 注册用户 ui -->
+        <activity
+            android:name=".app.ui.user.LoginActivity"
+            android:label="@string/title_activity_main"
+            android:screenOrientation="portrait"
+            android:theme="@style/AppStartTheme" >
+        </activity>
+        <activity
+            android:name=".app.ui.user.RegisterActivity"
+            android:label="@string/title_activity_main"
+            android:screenOrientation="portrait"
+            android:theme="@style/AppStartTheme" >
+        </activity>
+        <activity
+            android:name=".app.ui.user.PersonCenterActivity"
+            android:label="@string/title_activity_main"
+            android:screenOrientation="portrait"
+            android:theme="@style/AppStartTheme" >
+        </activity>
+        <activity
+            android:name=".app.ui.user.VerficationPhoneActivity"
+            android:label="@string/title_activity_main"
+            android:screenOrientation="portrait"
+            android:theme="@style/AppStartTheme" >
+        </activity>
+        <!-- 注册聊天ui -->
+        <activity
+            android:name=".app.ui.chat.SingleChatActivity"
+            android:label="@string/title_activity_main"
+            android:screenOrientation="portrait"
+            android:theme="@style/AppStartTheme" >
+        </activity>
+        <activity
+            android:name=".app.ui.chat.GroupListActivity"
+            android:label="@string/title_activity_main"
+            android:screenOrientation="portrait"
+            android:theme="@style/AppStartTheme" >
+        </activity>
+         <activity
+            android:name=".app.ui.chat.GroupChatActivity"
+            android:label="@string/title_activity_main"
+            android:theme="@style/AppStartTheme"
+            android:configChanges="orientation|keyboard|keyboardHidden"
+            android:windowSoftInputMode="adjustResize|stateHidden" >
+        </activity>
+        <activity
+            android:name=".app.ui.WebActivity"
+            android:label="@string/title_activity_main"
+            android:screenOrientation="portrait"
+            android:theme="@style/AppStartTheme" >
+        </activity>
+        <!-- Required SDK核心功能 -->
+        <activity
+            android:name="cn.jpush.android.ui.PushActivity"
+            android:configChanges="orientation|keyboardHidden"
+            android:theme="@android:style/Theme.Translucent.NoTitleBar" >
+            <intent-filter>
+                <action android:name="cn.jpush.android.ui.PushActivity" />
+
+                <category android:name="android.intent.category.DEFAULT" />
+                <category android:name="com.zhephone.hotspot" />
+            </intent-filter>
+        </activity>
+        <!-- Required  SDK核心功能 -->
+        <service
+            android:name="cn.jpush.android.service.DownloadService"
+            android:enabled="true"
+            android:exported="false" >
+        </service>
+
+        <!-- Required SDK 核心功能 -->
+        <service
+            android:name="cn.jpush.android.service.PushService"
+            android:enabled="true"
+            android:exported="false" >
+            <intent-filter>
+                <action android:name="cn.jpush.android.intent.REGISTER" />
+                <action android:name="cn.jpush.android.intent.REPORT" />
+                <action android:name="cn.jpush.android.intent.PushService" />
+                <action android:name="cn.jpush.android.intent.PUSH_TIME" />
+            </intent-filter>
+        </service>
+
+        <!-- Required SDK核心功能 -->
+        <receiver
+            android:name="cn.jpush.android.service.PushReceiver"
+            android:enabled="true" >
+            <intent-filter android:priority="1000" >
+                <action android:name="cn.jpush.android.intent.NOTIFICATION_RECEIVED_PROXY" />
+                <!-- Required  显示通知栏 -->
+                <category android:name="com.zhephone.hotspot" />
+            </intent-filter>
+            <intent-filter>
+                <action android:name="android.intent.action.USER_PRESENT" />
+                <action android:name="android.net.conn.CONNECTIVITY_CHANGE" />
+            </intent-filter>
+            <!-- Optional -->
+            <intent-filter>
+                <action android:name="android.intent.action.PACKAGE_ADDED" />
+                <action android:name="android.intent.action.PACKAGE_REMOVED" />
+
+                <data android:scheme="package" />
+            </intent-filter>
+        </receiver>
+
+        <!-- Required SDK核心功能 -->
+        <receiver android:name="cn.jpush.android.service.AlarmReceiver" />
+
+        <!-- User defined.  For test only  用户自定义的广播接收器 -->
+        <receiver
+            android:name=".app.PushReceiver"
+            android:enabled="true" >
+            <intent-filter>
+                <action android:name="cn.jpush.android.intent.REGISTRATION" />
+                <!-- Required  用户注册SDK的intent -->
+                <action android:name="cn.jpush.android.intent.UNREGISTRATION" />
+                <action android:name="cn.jpush.android.intent.MESSAGE_RECEIVED" />
+                <!-- Required  用户接收SDK消息的intent -->
+                <action android:name="cn.jpush.android.intent.NOTIFICATION_RECEIVED" />
+                <!-- Required  用户接收SDK通知栏信息的intent -->
+                <action android:name="cn.jpush.android.intent.NOTIFICATION_OPENED" />
+                <!-- Required  用户打开自定义通知栏的intent -->
+                <action android:name="cn.jpush.android.intent.ACTION_RICHPUSH_CALLBACK" />
+                <action android:name="open_chat_notification_action"  />
+                <!-- Optional 用户接受Rich Push Javascript 回调函数的intent -->
+                <category android:name="com.zhephone.hotspot" />
+                
+            </intent-filter>
+        </receiver>
+        <!-- User defined.  For test only  接受网络连接状态改变广播接收器 -->
+        <receiver
+            android:name=".app.WifiConnectionStatuReceiver"
+            android:enabled="true" >
+            <intent-filter>
+                <action android:name="android.net.wifi.WIFI_STATE_CHANGED"  />
+                <action android:name="android.net.conn.CONNECTIVITY_CHANGE" />
+            </intent-filter>
+        </receiver>
+
+        <!-- Required  . Enable it you can get statistics data with channel -->
+        <meta-data
+            android:name="JPUSH_CHANNEL"
+            android:value="developer-default" />
+        <meta-data
+            android:name="JPUSH_APPKEY"
+            android:value="915a5ea2aa78524c3293a86e" />
+        <!-- </>值来自开发者平台取得的AppKey -->
+        <service
+            android:name="com.baidu.location.f"
+            android:enabled="true"
+            android:process=":remote" >
+        </service>
+
+        <meta-data
+            android:name="com.baidu.lbsapi.API_KEY"
+            android:value="dIRhbUKEq7tRO2GOLxATRcKE" />
+
+        <service android:name=".app.UploadLatLonService" >
+        </service>
+    </application>
+
+</manifest>

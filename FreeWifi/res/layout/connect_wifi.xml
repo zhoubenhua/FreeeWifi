@@ -1,0 +1,61 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="fill_parent"
+    android:layout_height="fill_parent"
+    android:orientation="vertical"
+    android:background="@color/white">
+	<include 
+	    android:id="@+id/hotspot_topbar" 
+	    android:layout_width="fill_parent" 
+	    android:layout_height="@dimen/dimen_45_dip" 
+	    layout="@layout/toolbar" 
+	     /> 
+    <LinearLayout
+        android:id="@+id/psw_input_layout"
+        android:layout_width="fill_parent"
+        android:layout_height="wrap_content"
+        android:orientation="vertical"
+        android:padding="@dimen/dimen_10_dip" >
+
+        <TextView
+            android:id="@+id/wifi_ssid_name_tv"
+            style="@style/wrap_wrap"
+            android:textColor="@color/green" />
+
+        <EditText
+            android:id="@+id/wifi_password_et"
+            android:layout_width="fill_parent"
+            android:layout_height="@dimen/dimen_50_dip"
+            android:layout_marginTop="@dimen/dimen_10_dip"
+            android:background="@drawable/white_boarder"
+            android:inputType="textPassword"
+            android:padding="@dimen/dimen_5_dip"
+            android:singleLine="true"
+            android:visibility="gone"
+            android:textColorHint="@color/gray" />
+    </LinearLayout>
+
+    <Button
+        android:layout_marginTop="@dimen/dimen_10_dip"
+        android:id="@+id/connect_wifi_bt"
+        android:visibility="gone"
+        android:layout_gravity="center_horizontal"
+        android:layout_width="@dimen/dimen_100_dip"
+        android:layout_height="@dimen/dimen_45_dip"
+        android:background="@drawable/white_boarder"
+        android:text="@string/connect_wifi"
+        android:textColor="#434d57"
+        android:textSize="19sp" />
+    <Button
+        android:layout_marginTop="@dimen/dimen_10_dip"
+        android:id="@+id/disconnect_wifi_bt"
+        android:visibility="gone"
+        android:layout_gravity="center_horizontal"
+        android:layout_width="@dimen/dimen_100_dip"
+        android:layout_height="@dimen/dimen_45_dip"
+        android:background="@drawable/white_boarder"
+        android:text="@string/dis_connect_wifi"
+        android:textColor="#434d57"
+        android:textSize="19sp" />
+
+</LinearLayout>

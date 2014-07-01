@@ -1,0 +1,124 @@
+10
+
+dir
+409
+http://svn.shmaker.cn/svn/project/android/FreeWifi/res
+http://svn.shmaker.cn/svn/project
+
+
+
+2013-06-24T06:26:13.437500Z
+389
+zhoubenhua
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+830da67f-c6a3-9a47-bf57-c6f7fb2ae48d
+
+drawable
+dir
+
+values-320dpi-960x640-v4
+dir
+
+values-large
+dir
+
+values-320dpi-1280x800-v4
+dir
+
+values-mdpi-1024x768-v4
+dir
+
+values-480dpi-1776x1080-v4
+dir
+
+values-320dpi-1184x720-v4
+dir
+
+drawable-hdpi
+dir
+
+menu
+dir
+
+drawable-ldpi
+dir
+
+values-hdpi-v4
+dir
+
+values-hdpi-960x480-v4
+dir
+
+values-ldpi-v4
+dir
+
+layout
+dir
+
+values-mdpi-1024x600-v4
+dir
+
+values-hdpi-1280x720-v4
+dir
+
+anim
+dir
+
+values-mdpi-1280x800-v4
+dir
+
+values-480dpi-1920x1080-v4
+dir
+
+drawable-xhdpi
+dir
+
+values-ldpi-400x240-v4
+dir
+
+values-hdpi-1280x768-v4
+dir
+
+values-320dpi-1280x720-v4
+dir
+
+values
+dir
+
+values-mdpi-800x600-v4
+dir
+
+values-v11
+dir
+
+values-hdpi-960x540-v4
+dir
+
+values-mdpi-800x480-v4
+dir
+
+values-v14
+dir
+
+drawable-mdpi
+dir
+
+values-hdpi-854x480-v4
+dir
+
+values-hdpi-1024x600-v4
+dir
+

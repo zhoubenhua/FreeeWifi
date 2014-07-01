@@ -1,0 +1,24 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout
+  xmlns:android="http://schemas.android.com/apk/res/android"
+  android:layout_width="fill_parent"
+  android:orientation="vertical"
+  android:background="@color/white"
+  android:layout_height="fill_parent">
+  <include 
+	    android:id="@+id/hotspot_topbar" 
+	    android:layout_width="fill_parent" 
+	    android:layout_height="@dimen/dimen_45_dip" 
+	    layout="@layout/toolbar" 
+	     /> 
+  <ListView
+      android:id="@+id/app_list_lv"
+      style="@style/fill_wrap"
+      android:cacheColorHint="@color/transparent"
+      android:divider="@color/transparent"
+      android:dividerHeight="0dp"
+      android:fadingEdge="none"
+      android:listSelector="@drawable/list_selector"
+      android:scrollbars="none"
+      />
+</LinearLayout>

@@ -1,0 +1,35 @@
+K 25
+svn:wc:ra_dav:version-url
+V 79
+/svn/project/!svn/ver/356/android/FreeWifi/src/com/zhephone/hotspot/app/ui/chat
+END
+NearGroupActivity.java
+K 25
+svn:wc:ra_dav:version-url
+V 102
+/svn/project/!svn/ver/351/android/FreeWifi/src/com/zhephone/hotspot/app/ui/chat/NearGroupActivity.java
+END
+GroupListActivity.java
+K 25
+svn:wc:ra_dav:version-url
+V 102
+/svn/project/!svn/ver/351/android/FreeWifi/src/com/zhephone/hotspot/app/ui/chat/GroupListActivity.java
+END
+GroupListHandler.java
+K 25
+svn:wc:ra_dav:version-url
+V 101
+/svn/project/!svn/ver/351/android/FreeWifi/src/com/zhephone/hotspot/app/ui/chat/GroupListHandler.java
+END
+GroupChatActivity.java
+K 25
+svn:wc:ra_dav:version-url
+V 102
+/svn/project/!svn/ver/351/android/FreeWifi/src/com/zhephone/hotspot/app/ui/chat/GroupChatActivity.java
+END
+SingleChatActivity.java
+K 25
+svn:wc:ra_dav:version-url
+V 103
+/svn/project/!svn/ver/356/android/FreeWifi/src/com/zhephone/hotspot/app/ui/chat/SingleChatActivity.java
+END

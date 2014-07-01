@@ -1,0 +1,47 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:id="@+id/titebar_layout"
+    android:layout_width="fill_parent"
+    android:layout_height="@dimen/dimen_45_dip"
+    android:background="#252525" >
+
+    <Button
+        android:id="@+id/topbar_left_bt"
+        android:layout_width="@dimen/dimen_44_dip"
+        android:layout_height="@dimen/dimen_44_dip"
+        android:layout_alignParentLeft="true"
+        android:layout_centerVertical="true"
+        android:background="@drawable/btn_back"
+        android:textSize="14sp" />
+
+    <TextView
+        android:id="@+id/topbar_title_tv"
+        android:layout_width="fill_parent"
+        android:layout_height="wrap_content"
+        android:layout_centerVertical="true"
+        android:gravity="center"
+        android:singleLine="true"
+        android:text=""
+        android:textColor="@color/white"
+        android:textSize="17sp" />
+	 <TextView
+        android:id="@+id/topbar_right_title_tv"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignParentRight="true"
+        android:layout_centerVertical="true"
+        android:text=""
+        android:layout_marginRight="@dimen/dimen_10_dip"
+        android:singleLine="true"
+        android:textColor="@color/white"
+        android:textSize="17sp" />
+    <Button
+        android:id="@+id/topbar_right_bt"
+        android:layout_width="@dimen/dimen_63_dip"
+        android:layout_height="@dimen/dimen_30_dip"
+        android:layout_alignParentRight="true"
+        android:layout_centerVertical="true"
+        android:visibility="gone"
+        android:textSize="14sp" />
+
+</RelativeLayout>

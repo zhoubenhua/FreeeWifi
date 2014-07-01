@@ -1,0 +1,55 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="fill_parent"
+    android:layout_height="fill_parent"
+    android:background="@color/white" >
+    <RelativeLayout
+        android:id="@+id/bottom_rl"
+        android:layout_width="fill_parent"
+        android:layout_height="wrap_content"
+        android:layout_alignParentBottom="true"
+        >
+        <Button
+            android:id="@+id/send_bt"
+            android:layout_width="@dimen/dimen_60_dip"
+            android:layout_height="@dimen/dimen_40_dip"
+            android:layout_alignParentRight="true"
+            android:layout_centerVertical="true"
+            android:layout_marginBottom="@dimen/dimen_7_dip"
+            android:layout_marginRight="@dimen/dimen_10_dip"
+            android:layout_marginTop="@dimen/dimen_7_dip"
+            android:background="@drawable/chat_btn_send"
+            android:text="发送" />
+
+        <EditText
+            android:id="@+id/message_et"
+            android:layout_width="fill_parent"
+            android:layout_height="@dimen/dimen_40_dip"
+            android:layout_centerVertical="true"
+            android:layout_marginBottom="@dimen/dimen_7_dip"
+            android:layout_marginLeft="@dimen/dimen_10_dip"
+            android:layout_marginRight="@dimen/dimen_10_dip"
+            android:layout_marginTop="@dimen/dimen_7_dip"
+            android:layout_toLeftOf="@id/send_bt"
+            android:background="@drawable/chat_img_input"
+            android:gravity="left|center"
+            android:paddingLeft="@dimen/dimen_10_dip"
+            android:singleLine="true"
+            android:textAppearance="?android:textAppearanceMedium"
+            android:textSize="18sp" />
+    </RelativeLayout>
+
+    <com.zhephone.hotspot.app.widget.XListView
+        android:id="@+id/chat_lv"
+        android:layout_width="fill_parent"
+        android:layout_height="wrap_content"
+        android:layout_above="@id/bottom_rl"
+        android:cacheColorHint="#00000000"
+        android:divider="@null"
+        android:dividerHeight="@dimen/dimen_5_dip"
+        android:paddingRight="@dimen/dimen_10_dip"
+        android:scrollbarStyle="outsideOverlay"
+        android:stackFromBottom="false" 
+        />
+
+</RelativeLayout>

@@ -1,0 +1,167 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@color/background_color"
+    android:orientation="vertical" >
+
+    <include
+        android:id="@+id/hotspot_topbar"
+        android:layout_width="fill_parent"
+        android:layout_height="@dimen/dimen_45_dip"
+        layout="@layout/toolbar" />
+
+    <LinearLayout
+        android:layout_width="fill_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="@dimen/dimen_15_dip"
+        android:orientation="vertical" >
+
+        <LinearLayout
+            android:layout_width="fill_parent"
+            android:layout_height="wrap_content"
+            android:background="@color/white"
+            android:orientation="vertical" >
+
+            <View
+                android:layout_width="fill_parent"
+                android:layout_height="0.5dip"
+                android:background="@drawable/list_line" />
+
+            <RelativeLayout
+                android:id="@+id/wifi_connect_setting_rl"
+                android:layout_width="fill_parent"
+                android:layout_height="@dimen/dimen_45_dip"
+                android:paddingLeft="@dimen/dimen_10_dip"
+                android:paddingRight="@dimen/dimen_10_dip" >
+
+                <TextView
+                    style="@style/fill_wrap"
+                    android:layout_centerVertical="true"
+                    android:ellipsize="end"
+                    android:singleLine="true"
+                    android:text="@string/wifi_connect_setting"
+                    android:textColor="@color/movie_title_color"
+                    android:textSize="15sp" />
+
+                <ImageView
+                    android:layout_width="@dimen/dimen_18_dip"
+                    android:layout_height="@dimen/dimen_18_dip"
+                    android:layout_alignParentRight="true"
+                    android:layout_centerVertical="true"
+                    android:src="@drawable/right_arrow" />
+            </RelativeLayout>
+
+            <View
+                android:layout_width="fill_parent"
+                android:layout_height="0.5dip"
+                android:background="@drawable/list_line" />
+        </LinearLayout>
+
+        <LinearLayout
+            android:layout_width="fill_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="@dimen/dimen_15_dip"
+            android:background="@color/white"
+            android:orientation="vertical" >
+
+            <View
+                android:layout_width="fill_parent"
+                android:layout_height="0.5dip"
+                android:background="@drawable/list_line" />
+
+            <RelativeLayout
+                android:id="@+id/version_detail_rl"
+                android:layout_width="fill_parent"
+                android:layout_height="@dimen/dimen_45_dip"
+                android:paddingLeft="@dimen/dimen_10_dip"
+                android:paddingRight="@dimen/dimen_10_dip"
+                android:visibility="gone" >
+
+                <TextView
+                    style="@style/fill_wrap"
+                    android:layout_centerVertical="true"
+                    android:ellipsize="end"
+                    android:singleLine="true"
+                    android:text="@string/version_detail"
+                    android:textColor="@color/movie_title_color"
+                    android:textSize="15sp" />
+
+                <ImageView
+                    android:layout_width="@dimen/dimen_18_dip"
+                    android:layout_height="@dimen/dimen_18_dip"
+                    android:layout_alignParentRight="true"
+                    android:layout_centerVertical="true"
+                    android:src="@drawable/right_arrow" />
+            </RelativeLayout>
+
+            <View
+                android:layout_width="fill_parent"
+                android:layout_height="0.5dip"
+                android:layout_marginLeft="@dimen/dimen_10_dip"
+                android:layout_marginRight="@dimen/dimen_10_dip"
+                android:background="@drawable/list_line"
+                android:visibility="gone" />
+
+            <RelativeLayout
+                android:id="@+id/about_app_rl"
+                android:layout_width="fill_parent"
+                android:layout_height="@dimen/dimen_45_dip"
+                android:paddingLeft="@dimen/dimen_10_dip"
+                android:paddingRight="@dimen/dimen_10_dip" >
+
+                <TextView
+                    style="@style/fill_wrap"
+                    android:layout_centerVertical="true"
+                    android:ellipsize="end"
+                    android:singleLine="true"
+                    android:text="@string/about_app"
+                    android:textColor="@color/movie_title_color"
+                    android:textSize="15sp" />
+
+                <ImageView
+                    android:layout_width="@dimen/dimen_18_dip"
+                    android:layout_height="@dimen/dimen_18_dip"
+                    android:layout_alignParentRight="true"
+                    android:layout_centerVertical="true"
+                    android:src="@drawable/right_arrow" />
+            </RelativeLayout>
+
+            <View
+                android:layout_width="fill_parent"
+                android:layout_height="0.5dip"
+                android:layout_marginLeft="@dimen/dimen_10_dip"
+                android:background="@drawable/list_line" />
+
+            <RelativeLayout
+                android:id="@+id/help_feedback_rl"
+                android:layout_width="fill_parent"
+                android:layout_height="@dimen/dimen_45_dip"
+                android:paddingLeft="@dimen/dimen_10_dip"
+                android:paddingRight="@dimen/dimen_10_dip" >
+
+                <TextView
+                    style="@style/fill_wrap"
+                    android:layout_centerVertical="true"
+                    android:ellipsize="end"
+                    android:singleLine="true"
+                    android:text="@string/help_feedback"
+                    android:textColor="@color/movie_title_color"
+                    android:textSize="15sp" />
+
+                <ImageView
+                    android:layout_width="@dimen/dimen_18_dip"
+                    android:layout_height="@dimen/dimen_18_dip"
+                    android:layout_alignParentRight="true"
+                    android:layout_centerVertical="true"
+                    android:src="@drawable/right_arrow" />
+            </RelativeLayout>
+
+            <View
+                android:layout_width="fill_parent"
+                android:layout_height="0.5dip"
+                android:background="@drawable/list_line" />
+        </LinearLayout>
+    </LinearLayout>
+
+</LinearLayout>

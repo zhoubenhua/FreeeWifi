@@ -1,0 +1,58 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    style="@style/wrap_wrap"
+    android:id="@+id/keyboard_rl"
+    android:background="@color/white"
+    android:scrollbars="none" >
+
+    <include
+        android:id="@+id/hotspot_topbar"
+        android:layout_width="fill_parent"
+        android:layout_height="@dimen/dimen_45_dip"
+        android:layout_alignParentTop="true"
+        layout="@layout/toolbar" />
+	
+    <RelativeLayout
+        android:id="@+id/send_chat_rl"
+        android:layout_width="fill_parent"
+        android:layout_height="@dimen/dimen_45_dip"
+        android:layout_alignParentBottom="true"
+        android:background="@drawable/chat_bottom_bg"
+         >
+        <EditText
+            android:id="@+id/message_et"
+            android:layout_width="fill_parent"
+            android:layout_height="@dimen/dimen_29_dip"
+            android:layout_centerVertical="true"
+            android:layout_marginRight="@dimen/dimen_7_dip"
+            android:layout_marginLeft="@dimen/dimen_7_dip"
+            android:background="@drawable/chat_img_input"
+            android:gravity="left|center"
+            android:imeOptions="actionSend"
+            android:inputType="text"
+            android:paddingLeft="@dimen/dimen_10_dip"
+            android:textSize="14sp" />
+    </RelativeLayout>
+    
+    <LinearLayout
+        android:id="@+id/message_ll"
+        style="@style/fill_fill"
+        android:layout_below="@+id/hotspot_topbar"
+        android:layout_above="@+id/send_chat_rl"
+        android:background="@drawable/chat_bg" >
+
+        <com.zhephone.hotspot.app.widget.ChatListView
+            android:id="@+id/message_lv"
+            style="@style/fill_fill"
+            android:cacheColorHint="#00000000"
+            android:divider="@null"
+            android:transcriptMode="normal"
+            android:dividerHeight="@dimen/dimen_5_dip"
+            android:fadingEdge="none"
+            android:paddingLeft="@dimen/dimen_10_dip"
+            android:paddingRight="@dimen/dimen_10_dip"
+            android:scrollbars="none" />
+    </LinearLayout>
+
+
+</RelativeLayout>

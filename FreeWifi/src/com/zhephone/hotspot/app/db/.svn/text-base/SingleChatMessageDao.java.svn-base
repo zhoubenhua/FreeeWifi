@@ -1,0 +1,372 @@
+package com.zhephone.hotspot.app.db;
+
+import java.util.ArrayList;
+import java.util.List;
+
+import com.zhephone.hotspot.app.AppConfig;
+import com.zhephone.hotspot.app.AppContext;
+import com.zhephone.hotspot.app.common.Constant;
+import com.zhephone.hotspoti.app.bean.ChatMessage;
+import com.zhephone.hotspoti.app.bean.ChatMessageList;
+
+import android.content.ContentValues;
+import android.content.Context;
+import android.database.Cursor;
+
+/**
+ * 
+ * 类名称：ChatMessageDao 类描述：用于对聊天表做增删查改 创建人： wujian 修改人： wujian 修改时间： 2014-2-12
+ * 下午3:48:01
+ * 
+ */
+public class ChatMessageDao {
+
+	// private final static String TAG = "ChatMessageDao";
+	private WifiDatabseAccess wifiDb = null;
+	public static ChatMessageDao instance;
+
+	private ChatMessageDao() {
+		if (wifiDb == null) {
+			wifiDb = AppContext.getInstance().getDbAccess();
+		}
+	};
+
+	public static ChatMessageDao getInstance(Context context) {
+		if (instance == null) {
+			instance = new ChatMessageDao();
+		}
+		return instance;
+	}
+
+	/**
+	 * 保存聊天信息列表事务
+	 * 
+	 * @param removeList
+	 */
+	public void saveChatMessageList(List<ChatMessage> chatMessageList) {
+		// 开启事务
+		wifiDb.beginTransaction();
+		try {
+			for (ChatMessage chatMessage : chatMessageList) {
+				saveChatMessage(chatMessage);
+			}
+			// 设置事务标志为成功，当结束事务时就会提交事务
+			wifiDb.setTransactionSuccessful();
+		} catch (Exception e) {
+			e.printStackTrace();
+		} finally {
+			// 结束事务
+			wifiDb.endTransaction();
+		}
+	}
+
+//	/**
+//	 * 查询用户与所有人最近聊天一条信息
+//	 */
+//	public List<ChatMessage> queryUserAndAllPeopleChatLastMessageList(
+//			final String userId) {
+//		List<String> userIdList = new ArrayList<String>();
+//		String sql = "select send_id,receive_id from " + Constant.ChatTableDef.TABLE_NAME+ ";";
+//		Cursor c = wifiDb.getReadableDatabase().rawQuery(sql, null);
+//		String sendId;
+//		String receId;
+//		if (c.moveToFirst()) {
+//			sendId = c.getString(0);
+//			receId = c.getString(1);
+//			if (userIdList.contains(sendId)) {
+//				if (!userIdList.contains(receId)) {
+//					userIdList.add(receId);
+//				} 
+//			} else {
+//				userIdList.add(sendId);
+//			}
+//			while (c.moveToNext()) {
+//				sendId = c.getString(0);
+//				receId = c.getString(1);
+//				if (userIdList.contains(sendId)) {
+//					if (!userIdList.contains(receId)) {
+//						userIdList.add(receId);
+//					}
+//				} else {
+//					userIdList.add(sendId);
+//				}
+//			}
+//		}
+//		List<ChatMessage> chatList = new ArrayList<ChatMessage>();
+//		for (int i = 0; i < userIdList.size(); i++) {
+//			sql = "select  receive_id,send_id,content, chat_time, oId from chat_t where (send_id="
+//					+ userId
+//					+ " and receive_id="
+//					+ userIdList.get(i)
+//					+ " or send_id="
+//					+ userIdList.get(i)
+//					+ " and receive_id="
+//					+ userId
+//					+ ")"
+//					+ " ORDER BY chat_time DESC LIMIT 1"
+//					+ ";";
+//			c = wifiDb.getReadableDatabase().rawQuery(sql, null);
+//			ChatMessage chat;
+//			if (c.moveToFirst()) {
+//				chat = new ChatMessage();
+//				String chatTime;
+//				String message;
+//				sendId = c.getString(1);
+//				if (sendId != null)
+//					chat.setSendId(sendId);
+//				receId = c.getString(0);
+//				if (receId != null)
+//					chat.setReceiveId(receId);
+//				message = c.getString(2);
+//				if (message != null)
+//					chat.setContent(message);
+//				chatTime = c.getString(3);
+//				if (chatTime != null)
+//					chat.setTime(chatTime);
+//				chatList.add(chat);
+//			}
+//		}
+//		if (c != null) {
+//			c.close();
+//			c = null;
+//		}
+//		return chatList;
+//	}
+	
+	/**
+	 * 查询群组聊天信息
+	 * @param userId
+	 * @param idList
+	 * @return
+	 */
+	
+	public ChatMessageList queryGroupChatMessageListByPage(String userId,List<String> idList,int curPage, int pageSize) {
+		Cursor c = null;
+		String sql;
+		List<ChatMessage> chatList = new ArrayList<ChatMessage>();
+		ChatMessage chat = null;
+		String chatTime;
+		String message;
+		String sendId;
+		int firstResult = curPage * pageSize;
+		for(String receId:idList){
+			sql = "select  receive_id,send_id,content, chat_time, oId from chat_t where (send_id = ? "
+					+ " and receive_id = ? " + " or send_id = ? "
+					+ " and receive_id = ? " + ")" +" limit ? offset ? "+ ";";
+			c = wifiDb.getReadableDatabase().rawQuery(sql, new String[] { userId, receId, receId, userId,pageSize+"",firstResult+"" });
+			if (c.moveToFirst()) {
+				chat = new ChatMessage();
+				sendId = c.getString(1);
+				if (sendId != null) {
+					chat.setSendId(sendId);
+					if (sendId.equals(userId)) {
+						/**
+						 * 改变状态为自己发送的
+						 */
+						chat.setMySend(true);
+					}
+				}
+				receId = c.getString(0);
+				if(receId != null)			
+					chat.setReceiveId(receId);		
+				message = c.getString(2);
+				if (message != null)
+					chat.setContent(message);
+				chatTime = c.getString(3);
+				if (chatTime != null)
+					chat.setTime(chatTime);
+				chatList.add(chat);
+				while(c.moveToNext()) {
+					chat = new ChatMessage();
+					sendId = c.getString(1);
+					if (sendId != null) {
+						chat.setSendId(sendId);
+						if (sendId.equals(userId)) {
+							/**
+							 * 改变状态为自己发送的
+							 */
+							chat.setMySend(true);
+						}
+					}
+					receId = c.getString(0);
+					chat.setReceiveId(receId);
+					message = c.getString(2);
+					if (message != null)
+						chat.setContent(message);
+					chatTime = c.getString(3);
+					if (chatTime != null)
+						chat.setTime(chatTime);
+					chatList.add(chat);
+				}
+			}
+
+		}
+		ChatMessageList chatMessageList = new ChatMessageList();
+		c = wifiDb.getReadableDatabase().rawQuery(
+				"select count(*) from " + Constant.ChatTableDef.TABLE_NAME,
+				null);
+		if (c.moveToFirst()) {
+			int count = (int) c.getLong(0);
+			chatMessageList.setTotalCount(count);
+		}
+		if (c != null) {
+			c.close();
+			c = null;
+		}
+		chatMessageList.setMessages(chatList);
+		return chatMessageList;
+	}
+
+	/**
+	 * 保存聊天信息
+	 * 
+	 * @param chatMessage
+	 */
+	public void saveChatMessage(ChatMessage chatMessage) {
+		try {
+			ContentValues cv = new ContentValues();
+			cv.put(Constant.ChatTableDef.SEND_ID, chatMessage.getSendId());
+			cv.put(Constant.ChatTableDef.RECEIVE_ID, chatMessage.getReceiveId());
+			cv.put(Constant.ChatTableDef.CONTENT, chatMessage.getContent());
+			cv.put(Constant.ChatTableDef.CHAT_TIME, chatMessage.getTime());
+			wifiDb.insert(Constant.ChatTableDef.TABLE_NAME, cv);
+		} catch (Exception e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+	}
+
+	/**
+	 * 查询两个人聊天的所有信息
+	 * 
+	 * @return
+	 */
+	public List<ChatMessage> queryTwoPeopleChatMessageList(final String sendId,
+			String receiveId) {
+		String sql = "select * from " + Constant.ChatTableDef.TABLE_NAME
+				+ " where " + "(send_id = ? " + " and receive_id = ? "
+				+ " or send_id = ? " + " and receive_id = ? " + ");";
+		List<ChatMessage> chatMessages = wifiDb.queryList(sql,
+				new WifiDatabseAccess.QueryResultHandler<ChatMessage>() {
+					public ChatMessage handle(Cursor cursor, int numOfCols) {
+						ChatMessage chatMessage = new ChatMessage();
+						/**
+						 * 判断是不是自己发送的聊天
+						 */
+						String sendDeviceId = cursor.getString(cursor
+								.getColumnIndex(Constant.ChatTableDef.SEND_ID));
+						if (sendDeviceId.equals(AppConfig.getInstance()
+								.getDeviceToken())) {
+							/**
+							 * 改变状态为自己发送的
+							 */
+							chatMessage.setMySend(true);
+						}
+						chatMessage.setContent(cursor.getString(cursor
+								.getColumnIndex(Constant.ChatTableDef.CONTENT)));
+						chatMessage.setSendId(sendDeviceId);
+						chatMessage.setReceiveId(cursor.getString(cursor
+								.getColumnIndex(Constant.ChatTableDef.RECEIVE_ID)));
+						chatMessage.setTime(cursor.getString(cursor
+								.getColumnIndex(Constant.ChatTableDef.CHAT_TIME)));
+						return chatMessage;
+					}
+
+				}, new String[] { sendId, receiveId, receiveId, sendId });
+		ChatMessageList chatMessageList = new ChatMessageList();
+		Cursor c = wifiDb.getReadableDatabase().rawQuery(
+				"select count(*) from " + Constant.ChatTableDef.TABLE_NAME,
+				null);
+		if (c.moveToFirst()) {
+			int count = (int) c.getLong(0);
+			chatMessageList.setTotalCount(count);
+		}
+		if (c != null) {
+			c.close();
+			c = null;
+		}
+		chatMessageList.setMessages(chatMessages);
+		return chatMessages;
+	}
+
+	/**
+	 * 分页查询两个人聊天的所有信息
+	 * 
+	 * @return
+	 */
+	public ChatMessageList queryTwoPeopleChatMessageListByPage(
+			final String sendId, String receiveId, int curPage, int pageSize) {
+		int firstResult = curPage * pageSize;
+		/**
+		 * offset代表从第几条记录“之后“开始查询，limit表明查询多少条结果
+		 */
+		String sql = "select * from " + Constant.ChatTableDef.TABLE_NAME
+				+ " where " + "(send_id = ? " + " and receive_id = ? "
+				+ " or send_id = ? " + " and receive_id = ? " + ")"
+				+ " limit ? offset ? " + ";";
+		List<ChatMessage> chatMessages = wifiDb.queryList(sql,
+				new WifiDatabseAccess.QueryResultHandler<ChatMessage>() {
+					public ChatMessage handle(Cursor cursor, int numOfCols) {
+						ChatMessage chatMessage = new ChatMessage();
+						/**
+						 * 判断是不是自己发送的聊天
+						 */
+						String sendDeviceId = cursor.getString(cursor
+								.getColumnIndex(Constant.ChatTableDef.SEND_ID));
+						if (sendDeviceId.equals(AppConfig.getInstance()
+								.getDeviceToken())) {
+							/**
+							 * 改变状态为自己发送的
+							 */
+							chatMessage.setMySend(true);
+						}
+						chatMessage.setContent(cursor.getString(cursor
+								.getColumnIndex(Constant.ChatTableDef.CONTENT)));
+						chatMessage.setSendId(sendDeviceId);
+						chatMessage.setReceiveId(cursor.getString(cursor
+								.getColumnIndex(Constant.ChatTableDef.RECEIVE_ID)));
+						chatMessage.setTime(cursor.getString(cursor
+								.getColumnIndex(Constant.ChatTableDef.CHAT_TIME)));
+						return chatMessage;
+					}
+
+				}, new String[] { sendId, receiveId, receiveId, sendId,
+						pageSize + "", firstResult + "" });
+		ChatMessageList chatMessageList = new ChatMessageList();
+		Cursor c = wifiDb.getReadableDatabase().rawQuery(
+				"select count(*) from " + Constant.ChatTableDef.TABLE_NAME,
+				null);
+		if (c.moveToFirst()) {
+			int count = (int) c.getLong(0);
+			chatMessageList.setTotalCount(count);
+		}
+		chatMessageList.setMessages(chatMessages);
+		return chatMessageList;
+	}
+
+	/**
+	 * 查询所有人聊天的信息
+	 * 
+	 * @return
+	 */
+	public List<ChatMessage> getChatMessageList() {
+		String sql = "select * from " + Constant.ChatTableDef.TABLE_NAME;
+		List<ChatMessage> appShortcutIconList = wifiDb.queryList(sql,
+				new WifiDatabseAccess.QueryResultHandler<ChatMessage>() {
+					public ChatMessage handle(Cursor cursor, int numOfCols) {
+						ChatMessage chatMessage = new ChatMessage();
+						chatMessage.setContent(cursor.getString(cursor
+								.getColumnIndex(Constant.ChatTableDef.CONTENT)));
+						chatMessage.setSendId(cursor.getString(cursor
+								.getColumnIndex(Constant.ChatTableDef.SEND_ID)));
+						chatMessage.setReceiveId(cursor.getString(cursor
+								.getColumnIndex(Constant.ChatTableDef.RECEIVE_ID)));
+						chatMessage.setTime(cursor.getString(cursor
+								.getColumnIndex(Constant.ChatTableDef.CHAT_TIME)));
+						return chatMessage;
+					}
+
+				}, new String[] {});
+		return appShortcutIconList;
+	}
+}

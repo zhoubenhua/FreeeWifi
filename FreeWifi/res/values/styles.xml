@@ -1,0 +1,81 @@
+<resources>
+
+    <style name="AppTheme" parent="android:Theme.Light" />
+	  <style name="wrap_wrap">
+        <item name="android:layout_width">wrap_content</item>
+        <item name="android:layout_height">wrap_content</item>
+    </style>
+
+    <style name="fill_wrap">
+        <item name="android:layout_width">fill_parent</item>
+        <item name="android:layout_height">wrap_content</item>
+    </style>
+
+    <style name="fill_fill">
+        <item name="android:layout_width">fill_parent</item>
+        <item name="android:layout_height">fill_parent</item>
+    </style>
+    
+    <style name="chat_content_date_style">
+	    <item name="android:minHeight">@dimen/dimen_50_dip</item>
+	    <item name="android:gravity">left|center</item>    
+		<item name="android:textColor">#000000</item>   				
+		<item name="android:textSize">15sp</item>      				
+		<item name="android:lineSpacingExtra">@dimen/dimen_2_dip</item>   
+		<item name="android:clickable">true</item>   							
+		<item name="android:focusable">true</item>   
+		<item name="android:background">#bfbfbf</item> 
+	</style>
+	<!-- Theme 设置透明属性,避免启动应用界面上会有一个短暂的黑色闪屏停留  -->
+	<style name="AppStartTheme" parent="android:style/Theme.Black.NoTitleBar">  
+    	<item name="android:windowIsTranslucent">true</item>
+	</style>
+   <!-- Button.Default -->
+    <style name="Sure.Style" parent="@android:style/Widget.Button">
+        <item name="android:layout_width">match_parent</item>
+        <item name="android:layout_height">wrap_content</item>
+        <item name="android:background">@drawable/sure_selector</item>
+        <item name="android:textColor">@android:color/white</item>
+        <item name="android:paddingTop">12dp</item>
+        <item name="android:paddingBottom">12dp</item>
+        <item name="android:textAppearance">?android:attr/textAppearanceMedium</item>
+    </style>
+   <style name="player_progressBarStyleHorizontal">
+        <item name="android:paddingLeft">12.0dip</item>
+        <item name="android:paddingRight">12.0dip</item>
+        <item name="android:maxHeight">8.0dip</item>
+        <item name="android:indeterminate">false</item>
+        <item name="android:indeterminateOnly">false</item>
+        <item name="android:minHeight">8.0dip</item>
+        <item name="android:thumb">@drawable/player_seek_thumb</item>
+        <item name="android:thumbOffset">0.0dip</item>
+        <item name="android:layout_centerHorizontal">true</item>
+        <item name="android:layout_centerVertical">true</item>
+    </style>
+    
+    <style name="Cancel.Style" parent="@android:style/Widget.Button">
+        <item name="android:layout_width">match_parent</item>
+        <item name="android:layout_height">wrap_content</item>
+        <item name="android:background">@drawable/cancel_selector</item>
+        <item name="android:textColor">@color/dialog_text_color</item>
+        <item name="android:paddingTop">12dp</item>
+        <item name="android:paddingBottom">12dp</item>
+        <item name="android:textAppearance">?android:attr/textAppearanceMedium</item>
+    </style>
+
+    <style name="Dialog.Text.Style" parent="@android:style/TextAppearance.Medium">
+        <item name="android:layout_width">wrap_content</item>
+        <item name="android:layout_height">wrap_content</item>
+        <item name="android:textColor">@color/dialog_text_color</item>
+    </style>
+    
+    <style name="dialog" parent="@android:style/Theme.Dialog">
+        <item name="android:windowFrame">@null</item>
+        <item name="android:windowIsFloating">true</item>
+        <item name="android:windowIsTranslucent">false</item>
+        <item name="android:windowNoTitle">true</item>
+        <item name="android:background">@color/transparent</item>
+        <item name="android:windowBackground">@color/transparent</item>
+        <item name="android:backgroundDimEnabled">false</item>
+    </style>
+</resources>
